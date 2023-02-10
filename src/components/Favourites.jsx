@@ -1,7 +1,14 @@
-import { Col, Container, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  ListGroup,
+  ListGroupItem,
+  Row,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
 
 const Favourites = () => {
@@ -9,9 +16,23 @@ const Favourites = () => {
     (state) => state.favouriteCompany.companyName
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <Container className="pt-5">
-      <h1>Here is your Favourites list</h1>
+      <div className="d-flex align-items-center">
+        <h1 className="d-inline-block align-middle">
+          Here is your Favourites list
+        </h1>
+
+        <Button
+          variant="dark"
+          className="ml-auto"
+          onClick={() => navigate("/")}
+        >
+          Go to Home
+        </Button>
+      </div>
+
       <Row>
         <Col xs={12}>
           <ListGroup className="mt-4">
@@ -34,6 +55,7 @@ const Favourites = () => {
                     {company.title}
                   </a>
                   <MdDelete
+                    size={26}
                     fill="Red"
                     onClick={() => {
                       dispatch({
