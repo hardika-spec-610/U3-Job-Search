@@ -1,8 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import mainReducer from "../reducers/favourites";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import favouritesReducer from "../reducers/favouritesReducer";
 
 const store = configureStore({
-  reducer: mainReducer,
+  reducer: combineReducers({
+    favouriteCompany: favouritesReducer,
+  }),
   // we're telling Redux which reducer function to use!
 });
 

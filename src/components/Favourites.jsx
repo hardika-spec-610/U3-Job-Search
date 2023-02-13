@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
+import { removeFromFavouriteAction } from "../redux/actions";
 
 const Favourites = () => {
   let favouriteCompany = useSelector(
@@ -58,10 +59,7 @@ const Favourites = () => {
                     size={26}
                     fill="Red"
                     onClick={() => {
-                      dispatch({
-                        type: "REMOVE_FROM_FAVOURITE",
-                        payload: index,
-                      });
+                      dispatch(removeFromFavouriteAction(index));
                     }}
                   />
                 </div>
