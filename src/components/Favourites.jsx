@@ -39,7 +39,7 @@ const Favourites = () => {
           <ListGroup className="mt-4">
             {favouriteCompany.map((company, index) => (
               <ListGroupItem
-                key={index}
+                key={company._id}
                 className="my-2"
                 style={{
                   borderBlockStartWidth: 1,
@@ -59,7 +59,7 @@ const Favourites = () => {
                     size={26}
                     fill="Red"
                     onClick={() => {
-                      dispatch(removeFromFavouriteAction(index));
+                      dispatch(removeFromFavouriteAction(company._id));
                     }}
                   />
                 </div>
