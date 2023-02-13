@@ -1,10 +1,13 @@
 import { Row, Col, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { addToFavouriteAction } from "../redux/actions";
 
 const Job = ({ data }) => {
   const dispatch = useDispatch();
+  const jobs = useSelector((state) => state.favouriteCompany.companyName);
+  let location = useLocation();
+  // console.log(location);
 
   return (
     <Row
@@ -20,14 +23,17 @@ const Job = ({ data }) => {
         </a>
       </Col>
       <Col xs={3}>
-        <Button
-          variant="dark"
-          onClick={() => {
-            dispatch(addToFavouriteAction(data));
-          }}
-        >
-          Add to Favorite
-        </Button>
+        {location.pathname === ("/" || "/favourites") && (
+          <Button
+            variant="dark"
+            disabled={jobs.some((company) => company._id === data._id)}
+            onClick={() => {
+              dispatch(addToFavouriteAction(data));
+            }}
+          >
+            Add to Favorite
+          </Button>
+        )}
       </Col>
     </Row>
   );
