@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import favouritesReducer from "../reducers/favouritesReducer";
+import getJobsReducer from "../reducers/getJobsReducer";
 
 const store = configureStore({
   reducer: combineReducers({
     favouriteCompany: favouritesReducer,
+    jobs: getJobsReducer,
   }),
   // we're telling Redux which reducer function to use!
 });

@@ -17,9 +17,44 @@ export const addToFavouriteAction = (data) => {
 
 // })
 
+export const addToFavouriteActionAsync = (data) => {
+  return async (dispatch, getState) => {
+    console.log('...about to dispatch the "ADD_TO_FAVOURITE" action');
+    console.log("getState", getState());
+    if (getState().favouriteCompany.companyName.length < 6) {
+      dispatch({
+        type: ADD_TO_FAVOURITE,
+        payload: data,
+      });
+    }
+  };
+};
+
 export const removeFromFavouriteAction = (i) => {
   return {
     type: REMOVE_FROM_FAVOURITE,
     payload: i,
+  };
+};
+
+export const getJobsActionAsync = (url, query) => {
+  return async (dispatch, getState) => {
+    try {
+      let response = await fetch(url + query + "&limit=20");
+      if (response.ok) {
+        const { data } = await response.json();
+        // here I have the books from the API!
+        // instead of using them in a local state,
+        // I'm going to send them to the reducer :)
+        dispatch({
+          type: GET_JOBS,
+          payload: data,
+        });
+      } else {
+        console.log("error");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
