@@ -43,7 +43,7 @@ const MainSearch = () => {
           <div className="d-flex justify-content-between align-items-center">
             <h1>Remote Jobs Search</h1>
             <Link to="/favourites">
-              <Button variant="dark">Favorites</Button>
+              <Button variant="info">Favorites</Button>
             </Link>
           </div>
         </Col>
