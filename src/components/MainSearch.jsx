@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getJobsActionAsync } from "../redux/actions";
+import { getJobsActionAsync, GET_JOBS } from "../redux/actions";
 import Job from "./Job";
 import MyNav from "./MyNav";
 
@@ -28,6 +28,11 @@ const MainSearch = () => {
   const handleChange = (e) => {
     setQuery(e.target.value);
   };
+
+  useEffect(() => {
+    dispatch({ type: GET_JOBS, payload: [] });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
