@@ -1,15 +1,26 @@
 import { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getJobsActionAsync } from "../redux/actions";
 import Job from "./Job";
+import MyNav from "./MyNav";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
   // const [jobs, setJobs] = useState([]);
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobs.company);
+  const applicationSpinner = useSelector((state) => state.jobs.isLoading);
+  const applicationError = useSelector((state) => state.jobs.isError);
 
   const baseEndpoint =
     "https://strive-benchmark.herokuapp.com/api/jobs?search=";
@@ -38,6 +49,7 @@ const MainSearch = () => {
 
   return (
     <Container>
+      <MyNav buttonText="Start Searching" />
       <Row>
         <Col xs={10} className="mx-auto my-3">
           <div className="d-flex justify-content-between align-items-center">
@@ -58,6 +70,15 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
+          {applicationError && (
+            <Alert variant="danger" className="mr-2">
+              Something very bad happened with the data 😨
+            </Alert>
+          )}
+          {applicationSpinner && (
+            <Spinner animation="border" variant="success" />
+          )}
+
           {jobs.map((jobData) => (
             <Job key={jobData._id} data={jobData} />
           ))}

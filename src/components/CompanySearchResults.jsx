@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Job from "./Job";
 import { useParams } from "react-router-dom";
+import MyNav from "./MyNav";
 
 const CompanySearchResults = () => {
   const [jobs, setJobs] = useState([]);
@@ -34,6 +35,7 @@ const CompanySearchResults = () => {
 
   return (
     <Container>
+      <MyNav buttonText="Go Home" />
       <Row>
         <Col>
           {jobs.map((jobData) => (
